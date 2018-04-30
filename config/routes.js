@@ -68,7 +68,8 @@ module.exports.routes = {
 
   // Admin Routes
 
-  'GET /admin/dashboard': { controller: 'DashboardController', action:'adminIndex' } , locals: { layout: 'layouts/admin' } , 
+  'GET /admin/dashboard': { controller: 'DashboardController', action:'adminIndex' , locals: { layout: 'layouts/admin' }}  , 
+  'GET /admin/users': { controller: 'UsersController', action:'adminIndex', locals: { layout: 'layouts/admin' } } , 
 
 
 };
