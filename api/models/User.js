@@ -165,14 +165,43 @@ email status until they click the link in the confirmation email.`
     // n/a
 
   },
+  validationMessages: { //hand for i18n & l10n
+      emailAddress: {
+          required: 'Email is required',
+          email: 'Provide valid email address',
+          unique: 'Email address is already taken'
+      },
+      fullName: {
+          required: 'Fullname is required'
+      }
+  },
 
 
   // Find all users
   all: async function () {
 
-      return await User.find();
+      return await User.find({sort: 'createdAt DESC'});
 
   },
+
+  // Find user
+  get: async function (id) {
+
+      return await User.findOne({id: id});
+
+  },
+
+  // delete user
+  delete: async function (userId) {
+
+    if(userId)
+      return await User.destroy({ id: userId });
+    else
+      return false;
+
+  },
+
+
 
 
 };

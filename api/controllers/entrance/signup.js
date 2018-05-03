@@ -23,6 +23,7 @@ the account verification message.)`,
       required: true,
       type: 'string',
       isEmail: true,
+      unique: true,
       description: 'The email address for the new account, e.g. m@example.com.',
       extendedDescription: 'Must be a valid email address.',
     },
@@ -40,6 +41,9 @@ the account verification message.)`,
       type: 'string',
       example: 'Frida Kahlo de Rivera',
       description: 'The user\'s full name.',
+    },
+    isSuperAdmin:  {
+      type: 'boolean'
     }
 
   },
@@ -63,24 +67,53 @@ the account verification message.)`,
 
 
   fn: async function (inputs, exits) {
-
+    var req = this.req;
+    var res = this.res;
     var newEmailAddress = inputs.emailAddress.toLowerCase();
 
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
-    var newUserRecord = await User.create(Object.assign({
-      emailAddress: newEmailAddress,
-      password: await sails.helpers.passwords.hashPassword(inputs.password),
-      fullName: inputs.fullName,
-      tosAcceptedByIp: this.req.ip
-    }, sails.config.custom.verifyEmailAddresses? {
-      emailProofToken: await sails.helpers.strings.random('url-friendly'),
-      emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
-      emailStatus: 'unconfirmed'
-    }:{}))
-    .intercept('E_UNIQUE', 'emailAlreadyInUse')
-    .intercept({name: 'UsageError'}, 'invalid')
-    .fetch();
+
+    try{
+
+      
+      var newUserRecord = await User.create(Object.assign({
+        emailAddress: newEmailAddress,
+        password: await sails.helpers.passwords.hashPassword(inputs.password),
+        fullName: inputs.fullName,
+        tosAcceptedByIp: this.req.ip,
+        isSuperAdmin: (inputs.isSuperAdmin) ? true : false,
+      }, sails.config.custom.verifyEmailAddresses? {
+        emailProofToken: await sails.helpers.strings.random('url-friendly'),
+        emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
+        emailStatus: 'unconfirmed'
+      }:{}))
+      //.intercept('E_UNIQUE', ()=>{ return new Error('There is already an account using that email address!') })
+      // .intercept({name: 'UsageError'}, function(){
+      //   req.flash('error', 'Please fill all the required fields.')
+      //   return res.redirect('back');
+      // })
+      .fetch();
+
+    }
+
+    catch(err){
+
+
+      //req.session.flash = [];
+
+      if(err.code == 'E_UNIQUE')
+        req.flash('error', 'Email is already exist.')
+      else
+        req.flash('error', 'Please fill all the required fields.')
+      
+      //sails.log.info('Errors occored', err);
+
+      //return res.badRequest( {error: err.code} );
+
+      return res.redirect('/admin/users/add');
+    }
+    
 
     // If billing feaures are enabled, save a new customer entry in the Stripe API.
     // Then persist the Stripe customer id in the database.
@@ -93,8 +126,7 @@ the account verification message.)`,
       });
     }
 
-    // Store the user's new id in their session.
-    this.req.session.userId = newUserRecord.id;
+    
 
     if (sails.config.custom.verifyEmailAddresses) {
       // Send "confirm account" email
@@ -111,8 +143,20 @@ the account verification message.)`,
       sails.log.info('Skipping new account email verification... (since `verifyEmailAddresses` is disabled)');
     }
 
+    
+    if (req.wantsJSON) {
+      // Store the user's new id in their session.
+      this.req.session.userId = newUserRecord.id;
+      return exits.success();
+    } else {
+        req.flash('success', 'Account has been successfully created.')
+        return res.redirect('/admin/users/add');
+    }
+
+
+    
+
     // Since everything went ok, send our 200 response.
-    return exits.success();
 
   }
 

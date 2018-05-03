@@ -17,6 +17,10 @@ module.exports = {
       type: 'string'
     },
 
+    isSuperAdmin: {
+      type: 'string'
+    },
+
   },
 
 
@@ -76,6 +80,7 @@ module.exports = {
     // (We always set the fullName if provided.)
     var valuesToSet = {
       fullName: inputs.fullName,
+      isSuperAdmin: (inputs.isSuperAdmin) ? true : false,
     };
 
     switch (desiredEffectReEmail) {

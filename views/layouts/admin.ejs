@@ -7,18 +7,18 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/admin/plugins/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/admin/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="plugins/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/admin/plugins/Ionicons/css/ionicons.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="/admin/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/admin/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="/admin/css/skins/_all-skins.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,7 +36,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a href="/admin/dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -57,13 +57,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/avatar5.png" class="user-image" alt="User Image">
+              <img src="/admin/img/avatar5.png" class="user-image" alt="User Image">
               <span class="hidden-xs"><%=me.fullName%></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="img/avatar5.png" class="img-circle" alt="User Image">
+                <img src="/admin/img/avatar5.png" class="img-circle" alt="User Image">
 
                 <p>
                   <%=me.fullName%>
@@ -93,7 +93,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="img/avatar5.png" class="img-circle" alt="User Image">
+          <img src="/admin/img/avatar5.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><%=me.fullName%></p>
@@ -115,48 +115,21 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="<%= (req.path == '/admin/dashboard') ? 'active' : '' %>"><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li class="<%= (req.path == '/admin/users') ? 'active' : '' %>"><a href="/admin/users"><i class="fa fa-user"></i> <span>Users</span></a></li>
-
         
-
-        <!-- <li class="treeview">
+        <li class="treeview <%= (req.path == '/admin/users' || req.path == '/admin/users/add' || req.path == '/admin/users/edit/'+req.params.id) ? 'active menu-open' : '' %>" >
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
+            <i class="fa fa-user"></i>
+            <span>Users</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li class="<%= (req.path == '/admin/users/add') ? 'active' : '' %>"><a href="/admin/users/add"><i class="fa fa-circle-o"></i> Add New</a></li>
+            <li class="<%= (req.path == '/admin/users') ? 'active' : '' %>"><a href="/admin/users"><i class="fa fa-circle-o"></i> Manage</a></li>
           </ul>
-        </li> -->
-        <!-- <li>
-          <a href="../widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li> -->
+
 
         <li><a href="/logout"><i class="fa fa-sign-out"></i> <span>Sign out</span></a></li>
         
@@ -188,15 +161,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="js/jquery.min.js"></script>
+<script src="/admin/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/admin/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- DataTables -->
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/dataTables.bootstrap.min.js"></script>
+<script src="/admin/js/jquery.dataTables.min.js"></script>
+<script src="/admin/js/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
+<script src="/admin/js/adminlte.min.js"></script>
 <!-- page script -->
 <script>
   $(function () {

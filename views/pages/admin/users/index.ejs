@@ -22,13 +22,19 @@
             </div> -->
             <!-- /.box-header -->
             <div class="box-body">
+
+
+              <%- partial('../../../partials/flash') %>
+              
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Super Admin</th>
                   <th>Status</th>
+                  <th width="100px;">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,10 +43,24 @@
                   <% users.forEach(function(user){ %>
 
                     <tr>
+                      <td><%=user.id%></td>
                       <td><%=user.fullName%></td>
                       <td><%=user.emailAddress%></td>
                       <td><%=user.isSuperAdmin%></td>
                       <td><%=user.emailStatus%></td>
+
+                      <td>
+                        
+                        <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');" href="/admin/users/delete/<%=user.id%>" style="margin-right: 20px;">
+                          <i class="fa fa-remove"></i>
+                        </a>
+
+                        <a class="btn btn-success btn-sm" href="/admin/users/edit/<%=user.id%>">
+                          <i class="fa fa-edit"></i>
+                        </a>
+
+                      </td>
+
                     </tr>
 
                   <% }) %>

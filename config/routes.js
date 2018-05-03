@@ -70,6 +70,16 @@ module.exports.routes = {
 
   'GET /admin/dashboard': { controller: 'DashboardController', action:'adminIndex' , locals: { layout: 'layouts/admin' }}  , 
   'GET /admin/users': { controller: 'UsersController', action:'adminIndex', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/users/add': { controller: 'UsersController', action:'adminAdd', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/users/edit/:id': { controller: 'UsersController', action:'adminEdit', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/users/delete/:id': { controller: 'UsersController', action:'adminDelete', locals: { layout: false } } , 
 
+  // '/*': { controller: 'UsersController', action:'allPost', locals: { layout: false } } ,
+
+  // '/*': function(req, res, next) {
+  //   console.log(req.session);
+  //   //req.session.flash = [];
+  //   next();
+  // },
 
 };

@@ -1,0 +1,64 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Users
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/users">Users</a></li>
+        <li class="active">Edit</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      
+
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit user information</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <%- partial('../../../partials/flash') %>
+
+
+            <form role="form" method="post" action="/api/v1/entrance/signup">
+              <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Full name</label>
+                  <input type="text" class="form-control" id="fullName" placeholder="Enter full name" name="fullName" required="" value="<%=user.fullName%>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="emailAddress" required="" value="<%=user.emailAddress%>">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="isSuperAdmin" value="true" <% if(user.isSuperAdmin){ %> checked <% } %>   > Superadmin?
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+
+
+        </div>
+      </div>
+
+
+    </section>
+    <!-- /.content -->
