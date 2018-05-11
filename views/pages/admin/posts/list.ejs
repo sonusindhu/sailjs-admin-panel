@@ -1,0 +1,91 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Posts
+        <small>list</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/posts">Posts</a></li>
+        <li class="active">Manage</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box">
+            <!-- <div class="box-header">
+              <h3 class="box-title">Data Table With Full Features</h3>
+            </div> -->
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+              <%- partial('../../../partials/flash') %>
+              
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Uploaded By</th>
+                  <th>Uploaded at</th>
+                  <th>Status</th>
+                  <th width="100px;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                  <% posts.forEach(function(post){ %>
+
+                    <tr>
+                      <td><%=post.id%></td>
+                      <td><%=post.title%></td>
+                      <td><%=post.description%></td>
+                      <td>
+                        <% if(post.user_id) { %>
+                          <%= post.user_id.fullName %>
+                        <% } %>
+                      </td>
+                      <td><%= sails.moment(post.createdAt).format('MMMM Do YYYY, h:mm:ss a'); %></td>
+                      <td>
+                        <i class="fa <%= (post.status) ? 'fa-check text-success' : 'fa-ban text-danger' %>"> <%=post.status%></i>
+                      </td>
+
+                      <td>
+                        
+                        <a class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?');" href="/admin/posts/delete/<%=post.id%>" style="margin-right: 20px;">
+                          <i class="fa fa-remove"></i>
+                        </a>
+
+                        <a class="btn btn-success btn-sm" href="/admin/posts/edit/<%=post.id%>">
+                          <i class="fa fa-edit"></i>
+                        </a>
+
+                      </td>
+
+                    </tr>
+
+                  <% }) %>
+
+                
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->

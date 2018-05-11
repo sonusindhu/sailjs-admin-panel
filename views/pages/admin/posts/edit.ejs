@@ -1,0 +1,71 @@
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Posts
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/posts">Posts</a></li>
+        <li class="active">Edit</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      
+
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit post information</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+
+            <%- partial('../../../partials/flash') %>
+
+
+            <form role="form" method="post" action="/admin/posts/editPost">
+              <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+              <input type="hidden" name="id" value="<%= post.id %>" />
+
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Title</label>
+                  <input type="text" class="form-control" id="Title" placeholder="Enter title" name="title" required="" value="<%=post.title%>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Description</label>
+                  <textarea class="form-control" id="Description" placeholder="Enter Description" name="description" required="" rows="20"><%=post.description%></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Status</label>
+                  <select  name="status" class="form-control" style="width: 200px;">
+                    <option <%= (post.status) ? 'selected' : '' %> value="1">Publish</option>
+                    <option <%= (!post.status) ? 'selected' : '' %> value="0">Unpublish</option>
+                  </select>
+                </div>
+               
+                
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+
+
+        </div>
+      </div>
+
+
+    </section>
+    <!-- /.content -->

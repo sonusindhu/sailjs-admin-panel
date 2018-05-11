@@ -154,6 +154,11 @@ email status until they click the link in the confirmation email.`
       example: 1502844074211
     },
 
+    posts: {
+      collection: 'post',
+      via: 'user_id'
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝

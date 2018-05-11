@@ -130,6 +130,20 @@
           </ul>
         </li>
 
+        <li class="treeview <%= (req.path == '/admin/posts' || req.path == '/admin/posts/add' || req.path == '/admin/posts/edit/'+req.params.id) ? 'active menu-open' : '' %>" >
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Posts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<%= (req.path == '/admin/posts/add') ? 'active' : '' %>"><a href="/admin/posts/add"><i class="fa fa-circle-o"></i> Add New</a></li>
+            <li class="<%= (req.path == '/admin/posts') ? 'active' : '' %>"><a href="/admin/posts"><i class="fa fa-circle-o"></i> Manage</a></li>
+          </ul>
+        </li>
+
 
         <li><a href="/logout"><i class="fa fa-sign-out"></i> <span>Sign out</span></a></li>
         
@@ -164,7 +178,7 @@
 <script src="/admin/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/admin/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script> -->
 <!-- DataTables -->
 <script src="/admin/js/jquery.dataTables.min.js"></script>
 <script src="/admin/js/dataTables.bootstrap.min.js"></script>

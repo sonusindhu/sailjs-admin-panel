@@ -39,10 +39,10 @@ module.exports = {
     
     var id = req.params.id;
     var user = await User.delete(id);
-    if(user)
+    //if(user)
       req.flash('success', "User #"+ id + " has been deleted.");
-    else
-      req.flash('error', "User #"+ id + " delete encountered error.");
+    //else
+      //req.flash('error', "User #"+ id + " delete encountered error.");
 
     res.redirect('back');
     

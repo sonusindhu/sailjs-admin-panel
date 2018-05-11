@@ -23,6 +23,7 @@ module.exports.http = {
   middleware: {
 
     flash    : require('connect-flash')(),
+    //moment    : require('moment')(),
 
     /***************************************************************************
     *                                                                          *
@@ -40,7 +41,7 @@ module.exports.http = {
       'poweredBy',
       'router',
       'www',
-      'favicon',
+      'favicon'
     ],
 
 

@@ -74,12 +74,15 @@ module.exports.routes = {
   'GET /admin/users/edit/:id': { controller: 'UsersController', action:'adminEdit', locals: { layout: 'layouts/admin' } } , 
   'GET /admin/users/delete/:id': { controller: 'UsersController', action:'adminDelete', locals: { layout: false } } , 
 
-  // '/*': { controller: 'UsersController', action:'allPost', locals: { layout: false } } ,
 
-  // '/*': function(req, res, next) {
-  //   console.log(req.session);
-  //   //req.session.flash = [];
-  //   next();
-  // },
+  // Routes for posts
+  'GET /admin/posts': { controller: 'PostsController', action:'list', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/posts/add': { controller: 'PostsController', action:'add', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/posts/edit/:id': { controller: 'PostsController', action:'edit', locals: { layout: 'layouts/admin' } } , 
+  'GET /admin/posts/delete/:id': { controller: 'PostsController', action:'delete', locals: { layout: false } } ,
+
+  'POST /admin/posts/addPost': { controller: 'PostsController', action:'addPost', locals: { layout: false } } ,  
+  'POST /admin/posts/editPost': { controller: 'PostsController', action:'editPost', locals: { layout: false } } ,  
+
 
 };
